@@ -1,0 +1,645 @@
+/* 1. Warna dan pengaturan dasar. Ubah variabel di sini untuk mengganti tema. */
+:root {
+  --bg: #111111;
+  --panel: #171717;
+  --text: #f4f0eb;
+  --muted: #aba8a6;
+  --red: #8c2634;
+  --accent: #d27a85;
+  --line: #303030;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+}
+::selection {
+  background: var(--red);
+  color: white;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+}
+.container {
+  width: min(1180px, 88%);
+  margin-inline: auto;
+}
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 20px;
+  padding: 10px 20px;
+  background: var(--red);
+  z-index: 50;
+}
+.skip-link:focus {
+  top: 12px;
+}
+/* 2. Navigasi */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #111111f5;
+  border-bottom: 1px solid var(--line);
+}
+.nav-wrap {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.logo {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+.logo span {
+  color: var(--accent);
+}
+nav {
+  display: flex;
+  gap: 32px;
+}
+nav a {
+  font-size: 14px;
+  color: var(--muted);
+  padding: 8px 0;
+  position: relative;
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.25s;
+}
+nav a:hover,
+nav a.active {
+  color: var(--text);
+}
+nav a.active::after,
+nav a:hover::after {
+  width: 100%;
+}
+.nav-note {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+.menu-toggle {
+  display: none;
+}
+/* 3. Bagian pembuka */
+.hero {
+  padding-top: 80px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-image {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.eyebrow,
+.section-label,
+.category {
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  margin: 0 0 32px;
+}
+.small-line {
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
+}
+.hello {
+  font-size: 23px;
+  margin: 0 0 5px;
+}
+h1 {
+  font-size: clamp(52px, 6.2vw, 88px);
+  line-height: 1.08;
+  letter-spacing: -4px;
+  margin: 0 0 26px;
+  font-weight: 750;
+}
+h1 span {
+  display: block;
+  color: var(--accent);
+}
+.hero-description {
+  max-width: 475px;
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+.button {
+  display: inline-block;
+  background: var(--red);
+  padding: 13px 23px;
+  font-size: 14px;
+  border: 1px solid #aa3949;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+}
+.button:hover {
+  background: #a33040;
+  transform: translateY(-3px);
+}
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.hero-tags span + span::before {
+  content: "/";
+  margin-right: 12px;
+  color: var(--accent);
+}
+.identity {
+  min-height: 455px;
+  padding: 25px 30px;
+  background: var(--red);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  animation: appear 0.9s ease both;
+}
+.identity-top,
+.identity-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.identity-top {
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+.monogram {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(120px, 17vw, 245px);
+  line-height: 1;
+  letter-spacing: -22px;
+  align-self: center;
+  padding-right: 20px;
+  font-style: italic;
+}
+.monogram span {
+  color: #d5969b;
+}
+.identity-bottom {
+  font-size: 16px;
+  line-height: 1.45;
+}
+.asterisk {
+  font-size: 66px;
+  line-height: 1;
+}
+.hero-bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 25px 0;
+  margin-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+.hero-bottom a {
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14px;
+}
+/* 4. Tentang, pengalaman, dan keahlian */
+.section {
+  padding-block: 100px;
+  scroll-margin-top: 10px;
+}
+.section-label {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  color: var(--accent);
+  margin-bottom: 48px;
+}
+.rule {
+  height: 1px;
+  background: var(--line);
+  flex: 1;
+}
+h2 {
+  font-size: clamp(30px, 3.5vw, 46px);
+  letter-spacing: -1.7px;
+  line-height: 1.25;
+  font-weight: 500;
+  margin: 0;
+}
+h2 span {
+  color: var(--muted);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+.about-copy p {
+  margin: 0 0 18px;
+  color: var(--muted);
+}
+.about-copy p:first-child {
+  color: var(--text);
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+.facts > div {
+  padding-left: 35px;
+  border-left: 1px solid var(--line);
+}
+.facts > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.facts strong {
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+.facts strong span {
+  font-size: 16px;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.facts p {
+  font-size: 14px;
+  margin-bottom: 0;
+  color: var(--muted);
+}
+.experience {
+  background: var(--panel);
+}
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 30px;
+  margin-bottom: 45px;
+}
+.section-heading > p {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+}
+.experience-row {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  gap: 20px;
+  border-top: 1px solid var(--line);
+  padding: 32px 0;
+}
+.experience-row:last-child {
+  padding-bottom: 0;
+}
+.item-number {
+  font-family: Georgia, serif;
+  font-size: 23px;
+  color: var(--muted);
+}
+.category {
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+h3 {
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 0 12px;
+  letter-spacing: -0.5px;
+}
+.experience-row p:last-child {
+  color: var(--muted);
+  max-width: 580px;
+  font-size: 15px;
+  margin: 0;
+}
+.duration {
+  font-size: 13px;
+  color: var(--muted);
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.skill-card {
+  padding: 30px;
+  border: 1px solid var(--line);
+  position: relative;
+  transition:
+    border-color 0.3s,
+    transform 0.3s;
+}
+.skill-card:hover {
+  border-color: var(--red);
+  transform: translateY(-5px);
+}
+.skill-number {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.skill-card svg {
+  width: 45px;
+  height: 45px;
+  color: var(--accent);
+  margin: 15px 0 32px;
+}
+.skill-card p {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 35px;
+}
+.skill-caption {
+  font-size: 10px;
+  letter-spacing: 1.7px;
+  color: var(--muted);
+}
+.closing {
+  text-align: center;
+  border-top: 1px solid var(--line);
+  padding: 75px 0 90px;
+}
+.closing > p {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 22px;
+}
+.text-link {
+  display: inline-block;
+  margin-top: 30px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--accent);
+}
+.footer {
+  border-top: 1px solid var(--line);
+  padding-block: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.footer p {
+  font-size: 12px;
+  color: var(--muted);
+}
+.footer > span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+/* 5. Animasi hanya aktif setelah JavaScript menyiapkannya. */
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.reveal.ready {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.reveal.ready.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* 6. Tampilan tablet dan ponsel */
+@media (max-width: 900px) {
+  .nav-note {
+    display: none;
+  }
+  .hero {
+    gap: 35px;
+    padding-top: 55px;
+  }
+  .identity {
+    min-height: 390px;
+    padding: 22px;
+  }
+  .identity-top {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+  .about-grid {
+    gap: 35px;
+  }
+  .skill-card {
+    padding: 23px;
+  }
+  .hero-bottom {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 650px) {
+  .nav-wrap {
+    min-height: 75px;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--line);
+    padding: 7px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  nav {
+    width: 100%;
+    padding: 6px 0 18px;
+    gap: 12px;
+    justify-content: space-between;
+  }
+  nav.collapsible {
+    display: none;
+  }
+  nav.collapsible.open {
+    display: flex;
+  }
+  nav a {
+    font-size: 13px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 40px;
+  }
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    margin-bottom: 25px;
+  }
+  .hello {
+    font-size: 20px;
+  }
+  h1 {
+    font-size: 64px;
+    letter-spacing: -3px;
+  }
+  .hero-description {
+    font-size: 16px;
+  }
+  .identity {
+    min-height: 340px;
+  }
+  .monogram {
+    font-size: 190px;
+  }
+  .identity-top {
+    font-size: 10px;
+  }
+  .hero-bottom {
+    margin-top: 0;
+    gap: 12px;
+    font-size: 10px;
+  }
+  .hero-bottom a {
+    width: 100%;
+  }
+  .section {
+    padding-block: 65px;
+  }
+  .section-label {
+    font-size: 10px;
+    margin-bottom: 30px;
+  }
+  .about-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .facts {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 30px;
+  }
+  .facts > div {
+    padding-left: 0;
+    border: 0;
+  }
+  .facts strong {
+    font-size: 36px;
+  }
+  .facts p {
+    margin-top: 4px;
+  }
+  .section-heading {
+    display: block;
+  }
+  .section-heading > p {
+    margin-top: 20px;
+  }
+  .experience-row {
+    grid-template-columns: 30px 1fr;
+    gap: 12px;
+  }
+  .duration {
+    grid-column: 2;
+  }
+  h3 {
+    font-size: 21px;
+  }
+  .skill-card {
+    padding: 28px;
+  }
+  .skill-card svg {
+    margin: 0 0 22px;
+  }
+  .skill-card p {
+    margin-bottom: 24px;
+  }
+  .closing {
+    padding-block: 55px;
+  }
+  .footer {
+    flex-wrap: wrap;
+    gap: 10px 20px;
+  }
+  .footer > span {
+    width: 100%;
+  }
+}
+/* Hormati pengguna yang memilih mengurangi gerakan pada perangkatnya. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal.ready {
+    opacity: 1;
+    transform: none;
+  }
+}
